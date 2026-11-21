@@ -184,11 +184,11 @@ fun OnboardingScreenContent(
                 Spacer(Modifier.width(10.dp))
                 Column {
                     Text(
-                        text = "LS450DX Spa Manager",
+                        text = "Spa Manager",
                         style = MaterialTheme.typography.headlineSmall
                     )
                     Text(
-                        text = "100% offline care, dosing & reminder assistant",
+                        text = "Maintenance & reminder assistant",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
