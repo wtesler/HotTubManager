@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Steam wisps -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M40,42.5C36.8,38.5 43.2,33.5 40,29"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round"
+        android:strokeWidth="3.2" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M54,41.5C50.2,36.5 57.8,30.5 54,25"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round"
+        android:strokeWidth="3.5" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M68,42.5C64.8,38.5 71.2,33.5 68,29"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round"
+        android:strokeWidth="3.2" />
+
+    <!-- Rim -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M27,49H81A3,3 0,0 1,84 52A3,3 0,0 1,81 55H27A3,3 0,0 1,24 52A3,3 0,0 1,27 49Z" />
+
+    <!-- Tub body with even-odd cutouts for control pill -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M29,57H79V70A6,6 0,0 1,73 76H35A6,6 0,0 1,29 70ZM50,60.5H58A1.8,1.8 0,0 1,59.8 62.3A1.8,1.8 0,0 1,58 64.1H50A1.8,1.8 0,0 1,48.2 62.3A1.8,1.8 0,0 1,50 60.5Z" />
+</vector>
