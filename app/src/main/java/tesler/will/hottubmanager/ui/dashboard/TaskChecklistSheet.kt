@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Science
 import androidx.compose.material.icons.filled.Snooze
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Button
@@ -140,6 +141,22 @@ fun TaskChecklistSheet(
                         Spacer(Modifier.width(8.dp))
                         Text("Start ${preset.title}")
                     }
+                }
+            }
+
+            if (task.spec.taskType == TaskType.TEST_WATER_CHEMISTRY) {
+                OutlinedButton(
+                    onClick = {
+                        onDismiss()
+                        onOpenTimersTab()
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                ) {
+                    Icon(Icons.Default.Science, contentDescription = null)
+                    Spacer(Modifier.width(8.dp))
+                    Text("Open Water Chemistry Logger")
                 }
             }
 

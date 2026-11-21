@@ -99,7 +99,7 @@ class StartupRepository(
      * Completes Step 6 (Insert Cartridges):
      * - Records step6CompletedAt and filterCleanDueAt (+24 hours)
      * - Schedules the 24-hour post-startup filter rinse alarm
-     * - Optionally anchors all 5 recurring maintenance tasks to today
+     * - Optionally anchors all recurring maintenance tasks to today
      */
     suspend fun completeStep6AndSchedule24hFilterClean(
         resetMaintenanceAnchorsToToday: Boolean

@@ -44,6 +44,14 @@ class ScheduleCalculatorTest {
     }
 
     @Test
+    fun `1 week equals exact 7 days for weekly water chemistry test`() {
+        val calc = ScheduleCalculator()
+        val start = LocalDate.of(2026, 11, 21)
+        val next = calc.computeNextDueDate(start, 1, IntervalUnit.WEEKS)
+        assertEquals(LocalDate.of(2026, 11, 28), next)
+    }
+
+    @Test
     fun `1 month calendar arithmetic handles 30 and 31 day months`() {
         val calc = ScheduleCalculator()
         val jan31 = LocalDate.of(2026, 1, 31)

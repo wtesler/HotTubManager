@@ -39,6 +39,7 @@ Run from `W:\AndroidProjects\HotTubManager` (or via Android Studio Gradle tools)
 | `MONTHLY_SHOCK` | Every 1 month | `plusMonths(1)` | **Jets RUNNING**, **Cover OPEN** (`COVER OPEN`), **20 min** timer |
 | `CLEAN_FILTER` | Every 1 month | `plusMonths(1)` | Rinse with **Garden Hose**, **Jets OFF** (`JETS OFF`) |
 | `REFILL_TUB` | Every 4 months | `plusMonths(4)` | **Unplug 110V**, empty with pump, wipe shell & cover underside with **microfiber cloth**, then launch 7-step Startup |
+| `TEST_WATER_CHEMISTRY` | Every 1 week | `plusWeeks(1)` (7 days) | **Test Strip**, log readings in Chemistry tab, strict-order **TA -> pH -> CH**, **15 min** wait between additions |
 
 ### Strict-Order Water Balancing (`WaterBalanceAdvisor`)
 1. **Total Alkalinity** (`80–120 ppm`) — Low: `3 tbsp` Alkalinity Increaser; High: `1–2 tsp` pH Decreaser.
@@ -90,5 +91,5 @@ Run from `W:\AndroidProjects\HotTubManager` (or via Android Studio Gradle tools)
   - `WaterBalanceAdvisorTest.kt` — Empty input start step, strict TA -> pH -> CH priority, manual override mode, exact nudge doses.
   - `StartupRepositoryTest.kt` — Step progression, Step 6 -> 24h alarm scheduling & optional anchor reset, Step 7 completion.
 - **Instrumented Tests (`app/src/androidTest/.../`)**:
-  - `HotTubDatabaseTest.kt` — Pre-populated 5 LS450DX tasks, fill cycle & log CRUD, water test history queries.
+  - `HotTubDatabaseTest.kt` — Pre-populated 6 LS450DX tasks, fill cycle & log CRUD, water test history queries.
   - `MaintenanceReconcileWorkerTest.kt` — WorkManager execution via `TestListenableWorkerBuilder`.

@@ -184,6 +184,34 @@ object Ls450dxSpecs {
                     label = "Wipe down the underside of the cover with a microfiber cloth"
                 )
             )
+        ),
+        TaskSpec(
+            taskType = TaskType.TEST_WATER_CHEMISTRY,
+            title = "Test Water Chemistry",
+            shortTitle = "Water Chemistry",
+            intervalLabel = "Every 1 week",
+            intervalAmount = 1,
+            intervalUnit = IntervalUnit.WEEKS,
+            summary = "Dip a test strip, log TA, pH, Calcium Hardness & Free Chlorine, and balance in strict order (TA -> pH -> CH).",
+            badges = listOf(SafetyBadge.TEST_STRIP, SafetyBadge.STRICT_ORDER),
+            checklistSteps = listOf(
+                ChecklistStepSpec(
+                    id = "chem_dip_strip",
+                    label = "Dip a fresh test strip and read results",
+                    detail = "Check Total Alkalinity, pH, Calcium Hardness, and Free Chlorine."
+                ),
+                ChecklistStepSpec(
+                    id = "chem_log_readings",
+                    label = "Log readings in the Chemistry tab",
+                    detail = "Target ranges: TA 80–120 ppm, pH 7.2–7.8, CH 150–250 ppm, Chlorine 1.0–5.0 ppm."
+                ),
+                ChecklistStepSpec(
+                    id = "chem_balance_order",
+                    label = "Balance out-of-range levels in strict order: TA -> pH -> CH",
+                    detail = "Wait 15 min with jets on HIGH and air valves CLOSED between chemical additions."
+                )
+            ),
+            linkedTimer = TimerPreset.CHEMICAL_WAIT_15M
         )
     )
 

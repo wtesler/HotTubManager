@@ -69,7 +69,8 @@ class MaintenanceRepository(
     fun observeAllFillCycles(): Flow<List<FillCycleEntity>> = fillCycleDao.observeAllFillCycles()
 
     suspend fun ensureDefaultTasksSeeded() {
-        if (maintenanceDao.getAllTasks().isEmpty()) {
+        val existingTypes = maintenanceDao.getAllTasks().mapTo(mutableSetOf()) { it.taskType }
+        if (Ls450dxSpecs.recurringTasks.any { it.taskType !in existingTypes }) {
             HotTubDatabase.seedDefaultTasks(maintenanceDao, scheduleCalculator.today())
         }
     }

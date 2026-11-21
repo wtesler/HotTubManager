@@ -11,16 +11,17 @@ Every maintenance cadence, cartridge setting, filter-cycle programming sequence,
 - **First-Run Onboarding**
   - Guides setup for `POST_NOTIFICATIONS` and optional `SCHEDULE_EXACT_ALARM` ("Alarms & Reminders").
   - Configures preferred daily reminder time (default `9:00 AM`) and advance notice (`1 day` default).
-  - Initializes either a **Fresh Fill Today** (launches the 7-step Startup Sequence) or an **Already Running Tub** (backdates each of the 5 recurring maintenance tasks).
+  - Initializes either a **Fresh Fill Today** (launches the 7-step Startup Sequence) or an **Already Running Tub** (backdates each of the 6 recurring maintenance tasks).
 
 - **Maintenance Dashboard & Interactive Checklists**
   - Displays overall tub status, active Fill Cycle day counter (e.g., `Day 1 of ~120`), active countdown timers, and active startup/24h follow-up banners.
-  - Tracks the 5 recurring LS450DX schedules sorted by urgency:
+  - Tracks the 6 recurring LS450DX schedules sorted by urgency:
     1. **Replace Blue Mineral Cartridge** — Every 4 months (`Setting 6`, `JETS OFF`)
     2. **Replace Silver Chlorine Cartridge** — Every 4 weeks / 28 days (`Setting 2`, `JETS OFF`)
     3. **Monthly Shock Packet** — Every 1 month (`JETS RUNNING`, `COVER OPEN`, embedded 20-min timer)
     4. **Clean Filter** — Every 1 month (`GARDEN HOSE`, `JETS OFF`)
     5. **Drain & Refill Hot Tub** — Every 4 months (`UNPLUG 110V`, empty with pump, microfiber shell & cover wipe -> transitions to Startup Wizard)
+    6. **Test Water Chemistry** — Every 1 week (`TEST STRIP`, `TA -> pH -> CH`, Chemistry logger link + 15-min mix timer)
   - Supports gated safety checklists, **Complete Today**, **Past Date** backdating, and **Snooze / Reschedule**.
 
 - **Resumable 7-Step Startup & Refill Wizard**

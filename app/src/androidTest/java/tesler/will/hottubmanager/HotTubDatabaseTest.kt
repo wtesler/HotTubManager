@@ -37,19 +37,20 @@ class HotTubDatabaseTest {
     }
 
     @Test
-    fun seedDefaultTasksInsertsAll5Ls450dxTasksIdempotently() = runTest {
+    fun seedDefaultTasksInsertsAll6Ls450dxTasksIdempotently() = runTest {
         val dao = db.maintenanceDao()
         val base = LocalDate.of(2026, 11, 21)
         HotTubDatabase.seedDefaultTasks(dao, base)
         HotTubDatabase.seedDefaultTasks(dao, base)
 
         val tasks = dao.getAllTasks()
-        assertEquals(5, tasks.size)
+        assertEquals(6, tasks.size)
         assertNotNull(dao.getTaskByType(TaskType.BLUE_MINERAL))
         assertNotNull(dao.getTaskByType(TaskType.SILVER_CHLORINE))
         assertNotNull(dao.getTaskByType(TaskType.MONTHLY_SHOCK))
         assertNotNull(dao.getTaskByType(TaskType.CLEAN_FILTER))
         assertNotNull(dao.getTaskByType(TaskType.REFILL_TUB))
+        assertNotNull(dao.getTaskByType(TaskType.TEST_WATER_CHEMISTRY))
     }
 
     @Test

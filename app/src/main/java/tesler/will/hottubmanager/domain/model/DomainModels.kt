@@ -7,7 +7,8 @@ enum class TaskType(val stableId: Int) {
     SILVER_CHLORINE(2),
     MONTHLY_SHOCK(3),
     CLEAN_FILTER(4),
-    REFILL_TUB(5)
+    REFILL_TUB(5),
+    TEST_WATER_CHEMISTRY(6)
 }
 
 enum class IntervalUnit {
@@ -25,7 +26,9 @@ enum class SafetyBadge(val label: String, val isWarning: Boolean = false) {
     SETTING_6("SETTING 6", isWarning = false),
     SETTING_2("SETTING 2", isWarning = false),
     GARDEN_HOSE("GARDEN HOSE", isWarning = false),
-    MICROFIBER_WIPE("MICROFIBER CLOTH", isWarning = false)
+    MICROFIBER_WIPE("MICROFIBER CLOTH", isWarning = false),
+    TEST_STRIP("TEST STRIP", isWarning = false),
+    STRICT_ORDER("TA -> pH -> CH", isWarning = false)
 }
 
 enum class OverdueFrequency(val label: String, val intervalDays: Int?) {
