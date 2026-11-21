@@ -263,8 +263,9 @@ fun TaskChecklistSheet(
     }
 
     if (showPastDatePicker) {
+        val initialMillis = LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
         val state = rememberDatePickerState(
-            initialSelectedDateMillis = System.currentTimeMillis()
+            initialSelectedDateMillis = initialMillis
         )
         DatePickerDialog(
             onDismissRequest = { showPastDatePicker = false },
@@ -289,8 +290,9 @@ fun TaskChecklistSheet(
     }
 
     if (showSnoozeDatePicker) {
+        val initialMillis = task.effectiveDueDate.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
         val state = rememberDatePickerState(
-            initialSelectedDateMillis = System.currentTimeMillis()
+            initialSelectedDateMillis = initialMillis
         )
         DatePickerDialog(
             onDismissRequest = { showSnoozeDatePicker = false },

@@ -40,7 +40,12 @@ data class UserPreferences(
     val activeTimer: ActiveTimerState? = null
 )
 
-class UserPreferencesStore(private val context: Context) {
+interface MaintenancePreferences {
+    val preferencesFlow: Flow<UserPreferences>
+    suspend fun clearLastNotifiedDate(taskType: TaskType)
+}
+
+class UserPreferencesStore(private val context: Context) : MaintenancePreferences {
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -55,7 +60,7 @@ class UserPreferencesStore(private val context: Context) {
             longPreferencesKey("last_notified_day_${taskType.name}")
     }
 
-    val preferencesFlow: Flow<UserPreferences> = context.dataStore.data.map { prefs ->
+    override val preferencesFlow: Flow<UserPreferences> = context.dataStore.data.map { prefs ->
         val hour = prefs[Keys.REMINDER_HOUR] ?: 9
         val minute = prefs[Keys.REMINDER_MINUTE] ?: 0
         val freqName = prefs[Keys.OVERDUE_FREQUENCY]
@@ -118,7 +123,7 @@ class UserPreferencesStore(private val context: Context) {
         }
     }
 
-    suspend fun clearLastNotifiedDate(taskType: TaskType) {
+    override suspend fun clearLastNotifiedDate(taskType: TaskType) {
         context.dataStore.edit {
             it.remove(Keys.lastNotifiedEpochDayKey(taskType))
         }

@@ -8,7 +8,7 @@ import tesler.will.hottubmanager.data.db.dao.MaintenanceDao
 import tesler.will.hottubmanager.data.db.entity.FillCycleEntity
 import tesler.will.hottubmanager.data.db.entity.MaintenanceLogEntity
 import tesler.will.hottubmanager.data.db.entity.MaintenanceTaskEntity
-import tesler.will.hottubmanager.data.prefs.UserPreferencesStore
+import tesler.will.hottubmanager.data.prefs.MaintenancePreferences
 import tesler.will.hottubmanager.domain.ls450dx.Ls450dxSpecs
 import tesler.will.hottubmanager.domain.model.TaskStatus
 import tesler.will.hottubmanager.domain.model.TaskType
@@ -24,7 +24,7 @@ fun interface MaintenanceScheduleAnchorer {
 class MaintenanceRepository(
     private val maintenanceDao: MaintenanceDao,
     private val fillCycleDao: FillCycleDao,
-    private val preferencesStore: UserPreferencesStore,
+    private val preferencesStore: MaintenancePreferences,
     private val scheduleCalculator: ScheduleCalculator,
     private val alarmScheduler: AlarmScheduler
 ) : MaintenanceScheduleAnchorer {
@@ -127,7 +127,15 @@ class MaintenanceRepository(
 
     suspend fun snoozeTaskUntil(taskType: TaskType, targetDate: LocalDate) {
         val task = maintenanceDao.getTaskByType(taskType) ?: return
-        maintenanceDao.updateTask(task.copy(snoozedUntilDate = targetDate))
+        val updated = if (!targetDate.isAfter(task.nextDueDate)) {
+            task.copy(
+                nextDueDate = targetDate,
+                snoozedUntilDate = null
+            )
+        } else {
+            task.copy(snoozedUntilDate = targetDate)
+        }
+        maintenanceDao.updateTask(updated)
         preferencesStore.clearLastNotifiedDate(taskType)
         alarmScheduler.scheduleMaintenanceResync()
     }

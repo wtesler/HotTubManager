@@ -15,11 +15,16 @@ Operational handbook for AI coding agents working on **HotTubManager**, a 100% o
 Run from `W:\AndroidProjects\HotTubManager` (or via Android Studio Gradle tools):
 ```powershell
 .\gradlew.bat :app:testDebugUnitTest
-.\gradlew.bat :app:connectedDebugAndroidTest
 .\gradlew.bat :app:assembleDebug :app:assembleRelease
+# WARNING: Do NOT run :app:connectedDebugAndroidTest against a user's physical device
+# with live app data — AGP uninstalls `tesler.will.hottubmanager` after instrumentation
+# tests finish, wiping Room DB & DataStore data! Only run on a disposable emulator or
+# when explicitly requested.
+.\gradlew.bat :app:connectedDebugAndroidTest
 ```
 
 ### Known Tooling & Codebase Gotchas
+0. **Preserving User Data on Device**: Installing/deploying the debug app in-place (`studio_deploy` / Android Studio Run) preserves Room and DataStore data. Running `:app:connectedDebugAndroidTest` uninstalls `tesler.will.hottubmanager` after completion and wipes all local data — prefer JVM unit tests (`:app:testDebugUnitTest`) when verifying changes on a connected personal device.
 1. **Compose BOM / `compileSdk 37` Constraint**: Host SDK has `android-37.0` (not `37.1`). Keep `composeBom = "2026.08.00"`; newer BOMs (e.g., `2026.11.01`) pull `foundation-android:1.13.0` which requires `compileSdk >= 37.1`.
 2. **Material Icons Extended**: Not included in recent Compose BOMs; declared explicitly in `libs.versions.toml` under group `androidx.compose.material` (`material-icons-extended:1.7.8`).
 3. **Room Schema Exports**: KSP exports schemas to `app/schemas/` (`room.schemaLocation`). Update schema/migrations carefully if modifying Room entities.
@@ -90,6 +95,7 @@ Run from `W:\AndroidProjects\HotTubManager` (or via Android Studio Gradle tools)
   - `ScheduleCalculatorTest.kt` — Month-end clamping, 4-week 28-day cadence, advance notice, overdue checks, 24h follow-up timing.
   - `WaterBalanceAdvisorTest.kt` — Empty input start step, strict TA -> pH -> CH priority, manual override mode, exact nudge doses.
   - `StartupRepositoryTest.kt` — Step progression, Step 6 -> 24h alarm scheduling & optional anchor reset, Step 7 completion.
+  - `MaintenanceRepositoryTest.kt` — `snoozeTaskUntil` earlier & later than `nextDueDate`, non-destructive backfill seeding.
 - **Instrumented Tests (`app/src/androidTest/.../`)**:
   - `HotTubDatabaseTest.kt` — Pre-populated 6 LS450DX tasks, fill cycle & log CRUD, water test history queries.
   - `MaintenanceReconcileWorkerTest.kt` — WorkManager execution via `TestListenableWorkerBuilder`.
